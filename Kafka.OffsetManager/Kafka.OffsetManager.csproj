@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <PackageId>Kafka.OffsetManager</PackageId>
+    <Authors>Tautvydas Versockas</Authors>
+    <Description>Kafka.OffsetManager - thread safe Kafka offset manager for parallel data processing</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>Kafka Offset</PackageTags>
+    <PackageLicense>https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE</PackageLicense>
+    <RepositoryUrl>https://github.com/tautvydasversockas/kafka-offset-manager/</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Nullable>enable</Nullable>
+    <LangVersion>9.0</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <AssemblyTitle>Kafka.OffsetManager .NET Standard 2.0</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+    <AssemblyTitle>Kafka.OffsetManager .NET 5.0</AssemblyTitle>
+  </PropertyGroup>
+
+</Project>
