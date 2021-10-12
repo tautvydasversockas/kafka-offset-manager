@@ -1,1 +1,1 @@
-# kafka-ack-manager
+# kafka-offset-manager
