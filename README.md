@@ -1,6 +1,6 @@
 # Kafka Offset Manager
 
-This library provides a thread-safe Kafka in-memory offset manager implementation. It helps to track out of order offsets enabling multiple thread usage per single topic partition. 
+This library provides a thread-safe Kafka in-memory offset manager implementation. It helps to track out-of-order offsets enabling multiple thread usage per single topic partition. 
 
 ## Installation
 
