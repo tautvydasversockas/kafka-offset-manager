@@ -10,8 +10,13 @@ namespace Kafka.OffsetManager.Tests
         [Theory]
         [InlineData(new long[] { 5, 6, 7 }, new long[] { 5, 6 }, 6)]
         [InlineData(new long[] { 5, 6, 7 }, new long[] { 5, 7 }, 5)]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 7 }, 4)]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 6, 7 }, 4)]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { }, 4)]
         [InlineData(new long[] { 5, 6, 7 }, new long[] { 7, 5 }, 5)]
-        public async Task Getting_commitable_offset(long[] offsets, long[] ackOffsets, long expectedOffset)
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 5, 7, 6 }, 7)]
+        [InlineData(new long[] { }, new long[] { }, null)]
+        public async Task Getting_commitable_offset(long[] offsets, long[] ackOffsets, long? expectedOffset)
         {
             using var sut = new OffsetManager(100);
 
