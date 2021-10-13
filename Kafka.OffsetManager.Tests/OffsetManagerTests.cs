@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -6,55 +7,25 @@ namespace Kafka.OffsetManager.Tests
 {
     public sealed class OffsetManagerTests
     {
-        [Fact]
-        public async Task Getting_offset_after_consecutively_acknowledged_offsets()
+        [Theory]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 5, 6 }, 6)]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 5, 7 }, 5)]
+        [InlineData(new long[] { 5, 6, 7 }, new long[] { 7, 5 }, 5)]
+        public async Task Getting_commitable_offset(long[] offsets, long[] ackOffsets, long expectedOffset)
         {
-            var sut = new OffsetManager(10);
+            using var sut = new OffsetManager(100);
 
-            var ackId1 = await sut.GetAckIdAsync(1);
-            var ackId2 = await sut.GetAckIdAsync(2);
-            var ackId3 = await sut.GetAckIdAsync(3);
+            var offsetAckIds = new Dictionary<long, AckId>();
 
-            sut.Ack(ackId1);
-            sut.Ack(ackId2);
+            foreach (var offset in offsets)
+                offsetAckIds[offset] = await sut.GetAckIdAsync(offset);
+
+            foreach (var offset in ackOffsets)
+                sut.Ack(offsetAckIds[offset]);
 
             var commitOffset = sut.GetCommitOffset();
 
-            commitOffset.Should().Be(2);
-        }
-
-        [Fact]
-        public async Task Getting_offset_after_non_consecutively_acknowledged_offsets()
-        {
-            var sut = new OffsetManager(10);
-
-            var ackId1 = await sut.GetAckIdAsync(1);
-            var ackId2 = await sut.GetAckIdAsync(2);
-            var ackId3 = await sut.GetAckIdAsync(3);
-
-            sut.Ack(ackId1);
-            sut.Ack(ackId3);
-
-            var commitOffset = sut.GetCommitOffset();
-
-            commitOffset.Should().Be(1);
-        }
-
-        [Fact]
-        public async Task Getting_offset_after_out_of_order_acknowledged_offsets()
-        {
-            var sut = new OffsetManager(10);
-
-            var ackId1 = await sut.GetAckIdAsync(1);
-            var ackId2 = await sut.GetAckIdAsync(2);
-            var ackId3 = await sut.GetAckIdAsync(3);
-
-            sut.Ack(ackId3);
-            sut.Ack(ackId1);
-
-            var commitOffset = sut.GetCommitOffset();
-
-            commitOffset.Should().Be(1);
+            commitOffset.Should().Be(expectedOffset);
         }
     }
 }

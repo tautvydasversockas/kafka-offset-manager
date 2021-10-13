@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Kafka.OffsetManager
 {
-    internal sealed class IntegerThreadSafeSortedArrayLinkedList
+    internal sealed class IntegerThreadSafeSortedArrayLinkedList : IDisposable
     {
         public TimeSpan ResetCheckInterval { get; set; } = TimeSpan.FromMilliseconds(500);
 
@@ -76,6 +76,11 @@ namespace Kafka.OffsetManager
 
                 await Task.Delay(ResetCheckInterval, token);
             }
+        }
+
+        public void Dispose()
+        {
+            _addSemaphore.Dispose();
         }
     }
 }

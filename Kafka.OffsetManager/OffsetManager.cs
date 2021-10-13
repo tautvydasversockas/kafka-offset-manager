@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Kafka.OffsetManager
 {
-    public sealed class OffsetManager
+    public sealed class OffsetManager : IDisposable
     {
         private readonly IntegerThreadSafeSortedArrayLinkedList _unackedOffsets;
 
@@ -40,6 +40,11 @@ namespace Kafka.OffsetManager
         public Task ResetAsync(CancellationToken token = default)
         {
             return _unackedOffsets.ResetAsync(token);
+        }
+
+        public void Dispose()
+        {
+            _unackedOffsets.Dispose();
         }
     }
 }
