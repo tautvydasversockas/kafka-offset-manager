@@ -16,7 +16,7 @@ class Program
     {
         // `maxOutstanding` specifies the maximum number of offsets that
         // can be kept unacknowledged.
-        var offsetManager = new OffsetManager(maxOutstanding: 10000);
+        using var offsetManager = new OffsetManager(maxOutstanding: 10000);
 
         var offset = 5;
 
