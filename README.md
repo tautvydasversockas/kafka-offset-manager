@@ -1,8 +1,22 @@
 # Kafka Offset Manager
 
+[![Build status](https://img.shields.io/github/workflow/status/tautvydasversockas/kafka-offset-manager/.NET)](https://github.com/tautvydasversockas/kafka-offset-manager/actions/workflows/pipeline.yml)
+[![NuGet downloads](https://img.shields.io/nuget/v/kafka.offsetmanager.svg)](https://www.nuget.org/packages/Kafka.OffsetManager/)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE)
+
 This library provides a thread-safe Kafka in-memory offset manager implementation. It helps to track out-of-order offsets enabling multiple thread usage per single topic partition. 
 
 ## Installation
+
+Available on [NuGet](https://www.nuget.org/packages/CSharpFunctionalExtensions/)
+
+```bash
+dotnet add package Kafka.OffsetManager
+```
+
+```powershell
+PM> Install-Package Kafka.OffsetManager
+```
 
 ## Usage
 
