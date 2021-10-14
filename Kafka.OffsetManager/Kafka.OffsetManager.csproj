@@ -9,19 +9,12 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Kafka Offset</PackageTags>
     <PackageLicense>https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE</PackageLicense>
-    <RepositoryUrl>https://github.com/tautvydasversockas/kafka-offset-manager/</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/tautvydasversockas/kafka-offset-manager</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/tautvydasversockas/kafka-offset-manager/releases</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
     <LangVersion>9.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <AssemblyTitle>Kafka.OffsetManager .NET Standard 2.0</AssemblyTitle>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
-    <AssemblyTitle>Kafka.OffsetManager .NET 5.0</AssemblyTitle>
   </PropertyGroup>
 
 </Project>
