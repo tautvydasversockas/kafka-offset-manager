@@ -8,7 +8,7 @@ This library provides a thread-safe Kafka in-memory offset manager implementatio
 
 ## Installation
 
-Available on [NuGet](https://www.nuget.org/packages/CSharpFunctionalExtensions/)
+Available on [NuGet](https://www.nuget.org/packages/Kafka.OffsetManager/)
 
 ```bash
 dotnet add package Kafka.OffsetManager
