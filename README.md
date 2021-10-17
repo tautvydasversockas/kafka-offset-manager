@@ -1,6 +1,6 @@
 # Kafka Offset Manager
 
-[![Build status](https://img.shields.io/github/workflow/status/tautvydasversockas/kafka-offset-manager/.NET)](https://github.com/tautvydasversockas/kafka-offset-manager/actions/workflows/pipeline.yml)
+[![Build status](https://img.shields.io/github/workflow/status/tautvydasversockas/kafka-offset-manager/publish-nuget)](https://github.com/tautvydasversockas/kafka-offset-manager/actions/workflows/pipeline.yml)
 [![NuGet downloads](https://img.shields.io/nuget/v/kafka.offsetmanager.svg)](https://www.nuget.org/packages/Kafka.OffsetManager/)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE)
 
