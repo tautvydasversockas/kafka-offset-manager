@@ -6,45 +6,73 @@ namespace Kafka.OffsetManagement
 {
     public sealed class OffsetManager : IDisposable
     {
-        private readonly IntegerThreadSafeSortedArrayLinkedList _unackedOffsets;
+        public TimeSpan ResetCheckInterval { get; set; } = TimeSpan.FromMilliseconds(500);
+
+        private readonly object _lock = new();
+        private readonly IntegerArrayLinkedList _unackedOffsets;
+        private readonly SemaphoreSlim _addSemaphore;
+
+        private long? _lastAddedOffset;
 
         public OffsetManager(int maxOutstanding)
         {
-            _unackedOffsets = new IntegerThreadSafeSortedArrayLinkedList(maxOutstanding);
-        }
-
-        public OffsetManager(int maxOutstanding, TimeSpan resetCheckInterval)
-            : this(maxOutstanding)
-        {
-            _unackedOffsets.ResetCheckInterval = resetCheckInterval;
+            _unackedOffsets = new IntegerArrayLinkedList(maxOutstanding);
+            _addSemaphore = new SemaphoreSlim(maxOutstanding, maxOutstanding);
         }
 
         public async Task<AckId> GetAckIdAsync(long offset, CancellationToken token = default)
         {
-            return await _unackedOffsets.AddAsync(offset, token);
+            await _addSemaphore.WaitAsync(token);
+
+            lock (_lock)
+            {
+                if (offset <= _lastAddedOffset)
+                    throw KafkaOffsetManagementException.OffsetOutOfOrder(
+                        $"Offset {offset} must be greater than last added offset {_lastAddedOffset}.");
+
+                _lastAddedOffset = offset;
+                return _unackedOffsets.Add(offset);
+            }
         }
 
         public void Ack(AckId ackId)
         {
-            _unackedOffsets.Remove(ackId);
+            lock (_lock)
+            {
+                _unackedOffsets.Remove(ackId);
+            }
+
+            _addSemaphore.Release();
         }
 
         public long? GetCommitOffset()
         {
-            var firstUnackedOffset = _unackedOffsets.First();
-            return firstUnackedOffset is null
-                ? _unackedOffsets.LastAdded()
-                : firstUnackedOffset - 1;
+            lock (_lock)
+            {
+                return _unackedOffsets.First() ?? _lastAddedOffset + 1;
+            }
         }
 
-        public Task ResetAsync(CancellationToken token = default)
+        public async Task ResetAsync(CancellationToken token = default)
         {
-            return _unackedOffsets.ResetAsync(token);
+            while (!token.IsCancellationRequested)
+            {
+                lock (_lock)
+                {
+                    if (_unackedOffsets.First() is null)
+                    {
+                        _lastAddedOffset = null;
+                        return;
+                    }
+                }
+
+                await Task.Delay(ResetCheckInterval, token);
+            }
         }
 
         public void Dispose()
         {
-            _unackedOffsets.Dispose();
+            _addSemaphore.Dispose();
         }
     }
 }

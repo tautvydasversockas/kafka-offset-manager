@@ -47,8 +47,10 @@ class Program
         offsetManager.Ack(ackId);
 
         // `GetCommitOffset` returns an offset that can be safely committed.
-        // If offsets 3, 4, 7 are acknowledged, `GetCommitOffset` will return 4.
-        // Only when offsets 5 and 6 are acknowledged `GetCommitOffset` will return 7.
+        // If offsets 3, 4, 7 are acknowledged, `GetCommitOffset` will return 5.
+        // Only when offsets 5 and 6 are acknowledged `GetCommitOffset` will return 8.
+        // The offset returned not the one that was acknowledged but the one that can be safely committed.
+        // Safely commitable offset = last sequentialy processed offset + 1. 
         // `GetCommitOffset` is usually periodically called on a separate
         // from message processing thread.
         var commitableOffset = offsetManager.GetCommitOffset();
