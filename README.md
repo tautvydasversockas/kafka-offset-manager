@@ -21,7 +21,7 @@ PM> Install-Package Kafka.OffsetManager
 ## Usage
 
 ```csharp
-using Kafka.OffsetManager;
+using Kafka.OffsetManagement;
 using System.Threading.Tasks;
 
 class Program
