@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -35,12 +34,12 @@ namespace Kafka.OffsetManagement.Tests
         }
 
         [Fact]
-        public async Task Getting_ack_ids_for_out_of_order_offsets()
+        public async Task Getting_out_of_order_offset_ack_id()
         {
             using var sut = new OffsetManager(100);
             await sut.GetAckIdAsync(5);
 
-            KafkaOffsetManagementException? exception = null;
+            KafkaOffsetManagementException? ex = null;
 
             try
             {
@@ -48,10 +47,41 @@ namespace Kafka.OffsetManagement.Tests
             }
             catch (KafkaOffsetManagementException e)
             {
-                exception = e;
+                ex = e;
             }
 
-            exception?.ErrorCode.Should().Be(KafkaOffsetManagementErrorCode.OffsetOutOfOrder);
+            ex?.ErrorCode.Should().Be(KafkaOffsetManagementErrorCode.OffsetOutOfOrder);
+        }
+
+        [Fact]
+        public void Marking_offset_as_acked()
+        {
+            using var sut = new OffsetManager(100);
+
+            sut.MarkAsAcked(5);
+
+            var commitOffset = sut.GetCommitOffset();
+            commitOffset.Should().Be(6);
+        }
+
+        [Fact]
+        public async Task Marking_out_of_order_offset_as_acked()
+        {
+            using var sut = new OffsetManager(100);
+            await sut.GetAckIdAsync(5);
+
+            KafkaOffsetManagementException? ex = null;
+
+            try
+            {
+                sut.MarkAsAcked(4);
+            }
+            catch (KafkaOffsetManagementException e)
+            {
+                ex = e;
+            }
+
+            ex?.ErrorCode.Should().Be(KafkaOffsetManagementErrorCode.OffsetOutOfOrder);
         }
     }
 }

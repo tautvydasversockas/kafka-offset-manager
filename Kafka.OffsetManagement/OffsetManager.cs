@@ -45,6 +45,18 @@ namespace Kafka.OffsetManagement
             _addSemaphore.Release();
         }
 
+        public void MarkAsAcked(long offset)
+        {
+            lock (_lock)
+            {
+                if (offset <= _lastAddedOffset)
+                    throw KafkaOffsetManagementException.OffsetOutOfOrder(
+                        $"Offset {offset} must be greater than last added offset {_lastAddedOffset}.");
+
+                _lastAddedOffset = offset;
+            }
+        }
+
         public long? GetCommitOffset()
         {
             lock (_lock)
