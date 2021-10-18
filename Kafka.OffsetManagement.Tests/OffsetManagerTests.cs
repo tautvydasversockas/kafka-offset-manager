@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Kafka.OffsetManager.Tests
+namespace Kafka.OffsetManagement.Tests
 {
     public sealed class OffsetManagerTests
     {

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kafka.OffsetManager\Kafka.OffsetManager.csproj" />
+    <ProjectReference Include="..\Kafka.OffsetManagement\Kafka.OffsetManagement.csproj" />
   </ItemGroup>
 
 </Project>

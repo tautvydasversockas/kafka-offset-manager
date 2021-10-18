@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kafka.OffsetManager
+namespace Kafka.OffsetManagement
 {
     public sealed class OffsetManager : IDisposable
     {

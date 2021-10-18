@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kafka.OffsetManager
+namespace Kafka.OffsetManagement
 {
     public struct AckId : IEquatable<AckId>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kafka.OffsetManager
+namespace Kafka.OffsetManagement
 {
     internal sealed class IntegerArrayLinkedList
     {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.OffsetManager", "Kafka.OffsetManager\Kafka.OffsetManager.csproj", "{A54D681E-65B7-49F8-911A-29DB281A2EC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.OffsetManagement", "Kafka.OffsetManagement\Kafka.OffsetManagement.csproj", "{A54D681E-65B7-49F8-911A-29DB281A2EC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.OffsetManager.Tests", "Kafka.OffsetManager.Tests\Kafka.OffsetManager.Tests.csproj", "{C1FB54ED-2887-48F1-9584-F9B0B0F0EB29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.OffsetManagement.Tests", "Kafka.OffsetManagement.Tests\Kafka.OffsetManagement.Tests.csproj", "{C1FB54ED-2887-48F1-9584-F9B0B0F0EB29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
