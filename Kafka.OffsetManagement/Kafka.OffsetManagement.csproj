@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <PackageId>Kafka.OffsetManager</PackageId>
-    <Version>2.1.0</Version>
-    <Authors>Tautvydas Versockas</Authors>
-    <Description>Kafka.OffsetManager - thread safe Kafka offset manager for parallel data processing</Description>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>Kafka Offset</PackageTags>
-    <PackageLicense>https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE</PackageLicense>
-    <PackageProjectUrl>https://github.com/tautvydasversockas/kafka-offset-manager</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/tautvydasversockas/kafka-offset-manager/releases</PackageReleaseNotes>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <Nullable>enable</Nullable>
-    <LangVersion>9.0</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+		<PackageId>Kafka.OffsetManager</PackageId>
+		<Version>2.2.0</Version>
+		<Authors>Tautvydas Versockas</Authors>
+		<Description>Kafka.OffsetManager - thread safe Kafka offset manager for parallel data processing</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageTags>Kafka Offset</PackageTags>
+		<PackageLicense>https://github.com/tautvydasversockas/kafka-offset-manager/blob/main/LICENSE</PackageLicense>
+		<PackageProjectUrl>https://github.com/tautvydasversockas/kafka-offset-manager</PackageProjectUrl>
+		<PackageReleaseNotes>https://github.com/tautvydasversockas/kafka-offset-manager/releases</PackageReleaseNotes>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<WarningsAsErrors>nullable</WarningsAsErrors>
+		<LangVersion>10.0</LangVersion>
+	</PropertyGroup>
 
 </Project>

@@ -1,8 +1,7 @@
-﻿namespace Kafka.OffsetManagement
+﻿namespace Kafka.OffsetManagement;
+
+public enum KafkaOffsetManagementErrorCode
 {
-    public enum KafkaOffsetManagementErrorCode
-    {
-        NoError = 0,
-        OffsetOutOfOrder = 1
-    }
+    NoError = 0,
+    OffsetOutOfOrder = 1
 }
