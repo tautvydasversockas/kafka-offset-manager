@@ -22,42 +22,35 @@ PM> Install-Package Kafka.OffsetManager
 
 ```csharp
 using Kafka.OffsetManagement;
-using System.Threading.Tasks;
 
-class Program
-{
-    public static async Task Main(string[] args)
-    {
-        // `maxOutstanding` specifies the maximum number of offsets that
-        // can be kept unacknowledged.
-        using var offsetManager = new OffsetManager(maxOutstanding: 10000);
+// `maxOutstanding` specifies the maximum number of offsets that
+// can be kept unacknowledged.
+using var offsetManager = new OffsetManager(maxOutstanding: 10000);
 
-        // `GetAckIdAsync` returns an acknowledgement ID that later can be
-        // used to acknowledge successfully processed offsets.
-        // In case `OffsetManager` has `maxOutstanding` unacknowledged offsets,
-        // `GetAckIdAsync` waits and only returns when at least one of the 
-        // unacknowledged offsets is acknowledged.
-        var ackId = await offsetManager.GetAckIdAsync(offset: 5);
+// `GetAckIdAsync` returns an acknowledgement ID that later can be
+// used to acknowledge successfully processed offsets.
+// In case `OffsetManager` has `maxOutstanding` unacknowledged offsets,
+// `GetAckIdAsync` waits and only returns when at least one of the 
+// unacknowledged offsets is acknowledged.
+var ackId = await offsetManager.GetAckIdAsync(offset: 5);
 
-        // Process messages in parallel.
+// Process messages in parallel.
 
-        // `Ack` acknowledges successfully processed offset.
-        offsetManager.Ack(ackId);
+// `Ack` acknowledges successfully processed offset.
+offsetManager.Ack(ackId);
 
-        // `MarkAsAcked` marks successfully processed offset as acknowledged.
-        // `MarkAsAcked` can only be used to acknowledge offsets in sequential manner.
-        // Offset 5 can't be marked as acknowledged after marking offset 6 as acknowledged 
-        // or getting acknowledgement ID for offset 6.
-        offsetManager.MarkAsAcked(offset: 6);
+// `MarkAsAcked` marks successfully processed offset as acknowledged.
+// `MarkAsAcked` can only be used to acknowledge offsets in sequential manner.
+// Offset 5 can't be marked as acknowledged after marking offset 6 as acknowledged 
+// or getting acknowledgement ID for offset 6.
+offsetManager.MarkAsAcked(offset: 6);
 
-        // `GetCommitOffset` returns an offset that can be safely committed.
-        // If offsets 3, 4, 7 are acknowledged, `GetCommitOffset` will return 5.
-        // Only when offsets 5 and 6 are acknowledged `GetCommitOffset` will return 8.
-        // The offset returned not the one that was acknowledged but the one that can be safely committed.
-        // Safely commitable offset = last sequentialy processed offset + 1. 
-        // `GetCommitOffset` is usually periodically called on a separate
-        // from message processing thread.
-        var commitableOffset = offsetManager.GetCommitOffset();
-    }
-}
+// `GetCommitOffset` returns an offset that can be safely committed.
+// If offsets 3, 4, 7 are acknowledged, `GetCommitOffset` will return 5.
+// Only when offsets 5 and 6 are acknowledged `GetCommitOffset` will return 8.
+// The offset returned not the one that was acknowledged but the one that can be safely committed.
+// Safely commitable offset = last sequentialy processed offset + 1. 
+// `GetCommitOffset` is usually periodically called on a separate
+// from message processing thread.
+var commitableOffset = offsetManager.GetCommitOffset();
 ```
