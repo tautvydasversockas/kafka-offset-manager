@@ -54,3 +54,9 @@ offsetManager.MarkAsAcked(offset: 6);
 // from message processing thread.
 var commitableOffset = offsetManager.GetCommitOffset();
 ```
+
+## Support
+
+<a href="https://www.buymeacoffee.com/tautvydasverso"> 
+    <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210"  alt="tautvydasverso" />
+</a>
