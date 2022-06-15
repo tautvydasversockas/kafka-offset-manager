@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
 		<PackageId>Kafka.OffsetManager</PackageId>
-		<Version>2.2.0</Version>
+		<Version>2.2.1</Version>
 		<Authors>Tautvydas Versockas</Authors>
 		<Description>Kafka.OffsetManager - thread safe Kafka offset manager for parallel data processing</Description>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

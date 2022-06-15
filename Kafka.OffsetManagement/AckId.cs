@@ -1,9 +1,18 @@
 ﻿namespace Kafka.OffsetManagement;
 
+/// <summary>
+/// Acknowledgement ID.
+/// </summary>
 public struct AckId : IEquatable<AckId>
 {
+    /// <summary>
+    /// Acknowledgement ID value.
+    /// </summary>
     public int Value { get; }
 
+    /// <summary>
+    /// Creates acknowledgement ID based on integer value.
+    /// </summary>
     public AckId(int value)
     {
         Value = value;
